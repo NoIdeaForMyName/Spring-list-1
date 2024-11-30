@@ -1,46 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org en">
-<head>
-  <meta charset="text/html; UTF-8">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <title>Students list</title>
-</head>
-<body>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="_shared/_layout">
+
+<title layout:fragment="title">Students list</title>
+
+<div layout:fragment="content">
 <h1>Products list</h1>
 <a class="btn btn-primary" href="/product/add">Add product</a>
-<div class="content">
-          <table class="display table table-bordered" style="width:800px">
-            <thead class="text-center">
-            <tr>
-              <th class="text-right">Id</th>
-              <th class="text-left">Name</th>
-              <th class="text-left">Weight [kg]</th>
-              <th class="text-left">Category</th>
-              <th class="text-left">Price [zł]</th>
-              <th class="text-center" colspan="3">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="product : ${productList}">
-              <td class="text-right"th:text= "${product.getId()}"></td>
-              <td class="text-left"th:text= "${product.getName()}"></td>
-              <td class="text-center" th:text= "${product.getWeight()}"></td>
-              <td class="text-center" th:text= "${product.getCategory()}"></td>
-              <td class="text-left" th:text= "${product.getPrice()}"></td>
-              <td><a class="btn btn-primary" th:href="@{/product/{productId}/details(productId=${product.getId()})}">details</a></td>
-              <td><a class="btn btn-primary" th:href="@{/product/{productId}/edit(productId=${product.getId()})}">edit</a></td>
-<!--              <td><a class="btn btn-danger" th:href="@{/product/remove(id=${product.id})}">remove</a></td>-->
-              <td>
-<!--                <form th:action="@{/product/remove}" method="post">-->
-                <form action="#" th:action="@{/product/remove}" th:object="${product}" method="post">
-                    <button type="submit" class="btn btn-danger">remove</button>
-                </form>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+    <div class="content">
+              <table class="display table table-bordered" style="width:800px">
+                <thead class="text-center">
+                <tr>
+                  <th class="text-right">Id</th>
+                  <th class="text-left">Name</th>
+                  <th class="text-left">Weight [kg]</th>
+                  <th class="text-left">Category</th>
+                  <th class="text-left">Price [zł]</th>
+                  <th class="text-center" colspan="3">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${productList}">
+                  <td class="text-right"th:text= "${product.getId()}"></td>
+                  <td class="text-left"th:text= "${product.getName()}"></td>
+                  <td class="text-center" th:text= "${product.getWeight()}"></td>
+                  <td class="text-center" th:text= "${product.getCategory()}"></td>
+                  <td class="text-left" th:text= "${product.getPrice()}"></td>
+                  <td><a class="btn btn-primary" th:href="@{/product/{productId}/details(productId=${product.getId()})}">details</a></td>
+                  <td><a class="btn btn-primary" th:href="@{/product/{productId}/edit(productId=${product.getId()})}">edit</a></td>
+    <!--              <td><a class="btn btn-danger" th:href="@{/product/remove(id=${product.id})}">remove</a></td>-->
+                  <td>
+    <!--                <form th:action="@{/product/remove}" method="post">-->
+                    <form action="#" th:action="@{/product/remove}" th:object="${product}" method="post">
+                        <button type="submit" class="btn btn-danger">remove</button>
+                    </form>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+    </div>
 </div>
-<p th:text="${serverTime}"></p>
-</body>
 </html>
