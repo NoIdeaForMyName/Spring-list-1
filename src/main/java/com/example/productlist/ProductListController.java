@@ -3,6 +3,7 @@ package com.example.productlist;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -36,10 +37,17 @@ public class ProductListController {
     }
 
     @PostMapping("/product/add")
-    String addProduct(@ModelAttribute("product") Product product) {
-        productService.add(product);
+    String addProduct(@ModelAttribute("product") Product product, RedirectAttributes redirectAttributes) {
+        boolean success = productService.add(product);
+
+        if (!success) {
+            redirectAttributes.addFlashAttribute("error", "Product could not be added. ID must be unique.");
+            return "redirect:/product/add";
+        }
+
         return "redirect:/product/";
     }
+
 
     @GetMapping("/product/{productId}/details")
     String displayProductDetails(@PathVariable Integer productId, Model model) {
