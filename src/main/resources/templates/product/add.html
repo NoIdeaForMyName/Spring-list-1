@@ -8,6 +8,20 @@
   <script th:if="${error}">
     alert("[[${error}]]");
   </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", (e) => {
+      let serialized = [[${usedIDs}]]; //special Thymeleaf syntax
+      let usedIDs = new Set(serialized);
+
+      document.getElementById("product-id").addEventListener("blur", (e) => {
+        let id = parseInt(document.getElementById("product-id").value);
+        if (usedIDs.has(id)) {
+          alert("ID must be unique!");
+        }
+      });
+    });
+  </script>
 </div>
 
 <title layout:fragment="title">Add product</title>
@@ -20,7 +34,7 @@
     <tbody>
     <tr>
       <td><p>Id: </p></td>
-      <td><input type="text" th:field="*{id}" /></td>
+      <td><input id="product-id" type="text" th:field="*{id}" /></td>
     </tr>
     <tr>
       <td><p>Name: </p></td>

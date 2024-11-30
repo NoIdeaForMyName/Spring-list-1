@@ -33,6 +33,7 @@ public class ProductListController {
     String addProduct(Model model) {
         Product toAddProduct = new Product();
         model.addAttribute("product", toAddProduct);
+        model.addAttribute("usedIDs", productService.getUsedIDs());
         return "product/add";
     }
 

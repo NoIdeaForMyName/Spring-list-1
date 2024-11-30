@@ -9,7 +9,7 @@ import java.util.Set;
 @Service
 public class ProductService extends ArrayList<Product> {
 
-    private Set<Long> ids;
+    private final Set<Long> ids;
 
     public ProductService() {
         super();
@@ -26,12 +26,11 @@ public class ProductService extends ArrayList<Product> {
         return true;
     }
 
+    public Set<Long> getUsedIDs() {
+        return ids;
+    }
+
     public Product getById(long id) {
-//        for (Product product: this) {
-//            if (product.getId() == id) {
-//                return product;
-//            }
-//        }
         return this.get(getIndexById(id));
     }
 
