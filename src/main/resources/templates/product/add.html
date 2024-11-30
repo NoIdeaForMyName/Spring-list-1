@@ -4,9 +4,11 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorate="_shared/_layout">
 
-<script th:if="${error}">
-  alert("[[${error}]]");
-</script>
+<div layout:fragment="head">
+  <script th:if="${error}">
+    alert("[[${error}]]");
+  </script>
+</div>
 
 <title layout:fragment="title">Add product</title>
 
