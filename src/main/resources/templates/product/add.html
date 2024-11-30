@@ -17,9 +17,20 @@
       document.getElementById("product-id").addEventListener("blur", (e) => {
         let id = parseInt(document.getElementById("product-id").value);
         if (usedIDs.has(id)) {
+          document.getElementById("product-id").value = "";
           alert("ID must be unique!");
         }
       });
+
+      document.getElementById("product-id").value = "";
+
+      document.getElementById("add-form").addEventListener("submit", (e) => {
+        if (document.getElementById("product-id").value === "") {
+          e.preventDefault();
+          alert("ID value cannot be empty!");
+        }
+      });
+
     });
   </script>
 </div>
@@ -29,7 +40,7 @@
 <div layout:fragment="content">
 
 <h1>Add a new product</h1>
-<form action="#" th:action="@{/product/add}" th:object="${product}" method="post">
+<form id="add-form" action="#" th:action="@{/product/add}" th:object="${product}" method="post">
   <table class="table table-striped table-bordered" style="width:800px">
     <tbody>
     <tr>
