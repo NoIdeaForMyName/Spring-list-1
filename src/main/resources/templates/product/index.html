@@ -29,14 +29,14 @@
                   <td class="text-left" th:text= "${product.getPrice()}"></td>
                   <td><a class="btn btn-primary" th:href="@{/product/{productId}/details(productId=${product.getId()})}">details</a></td>
                   <td><a class="btn btn-primary" th:href="@{/product/{productId}/edit(productId=${product.getId()})}">edit</a></td>
-    <!--              <td><a class="btn btn-danger" th:href="@{/product/remove(id=${product.id})}">remove</a></td>-->
                   <td>
-    <!--                <form th:action="@{/product/remove}" method="post">-->
-                    <form action="#" th:action="@{/product/remove}" th:object="${product}" method="post">
-                        <button type="submit" class="btn btn-danger">remove</button>
+                    <form th:action="@{/product/remove}" th:object="${product}" method="post">
+                        <input type="hidden" name="id" th:value="${product.id}" />
+                        <button type="submit" class="btn btn-danger">Remove</button>
                     </form>
                   </td>
                 </tr>
+
                 </tbody>
               </table>
     </div>
